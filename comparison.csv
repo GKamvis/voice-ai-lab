@@ -1,0 +1,11 @@
+﻿model,audio_file,audio_duration,inference_time,RTF,WER,CER,transcript
+base,01_clean.wav,7.01,1.676,0.239,0.4615,0.1667,Kursun programı kabakcıdın hazırlanmış video derslerden və hər dərsə aydı olan tapşıriklardan ibarət.
+base,02_noise.wav,5.47,1.904,0.348,0.4545,0.1944,"İstərinən dərsini izləmək üçün, həmin dərsini səyifəsinə taqrul olmaq lazımdır."
+base,03_fast_speech.wav,6.798,2.409,0.3543,0.4706,0.1373,"hər izlenilmiş ters və hər həl edilmiş təpşirük, həmin tələbənin kursun materiallarda keçməsayını və faisını artırır."
+base,04_numbers_names.wav,13.33,2.893,0.217,0.7692,0.2387,"1991. fevrağı inda, Hollanda, Riyaziyat ve Computer elimlerim erkezinin emektaşı, Gvidevan Rostum o zamanlar yeni olan Payton Programlaştırmad dilinin MENB codeunu neşretti."
+base,05_technical.wav,5.31,2.06,0.388,0.6154,0.3562,özümüzdə intəcər və float. Yəni tam və çəsirli edət təpli abiyyəklərdən danışəzim.
+small,01_clean.wav,7.01,5.102,0.7278,0.3077,0.1,Kursun proqramı Qabqcadan hazırlanmış video dərslərdən və hər dərsə ayda olan tapşiriklardan ibarət.
+small,02_noise.wav,5.47,6.095,1.1143,0.2727,0.125,Kursun islərinən dərsini izləmək üçün həmin dərsin səhəsmə dəğil olmaq lazımdır.
+small,03_fast_speech.wav,6.798,6.197,0.9116,0.2353,0.0588,"Hər izlənilmiş dərs və hər həl edilmiş tapşırıq, həmin tələbənin kursun materiallarını keçməsə aynı və fayzını artırır."
+small,04_numbers_names.wav,13.33,7.048,0.5287,0.4615,0.1355,"1991-ci nün fevrə ayında, Halandiyar Yezətvə Computer Elimləri mərkəzinin əməktaşı Qvida Van Rossum o zamanlar yeni olan Python programlaşdırma dilinin mənbə kodunu nəşrətti."
+small,05_technical.wav,5.31,4.552,0.8573,0.5385,0.2466,"özümüzdə Integer və Float, yəni tam və kəsirli ədət tipli abyeklərdən danışəz."
