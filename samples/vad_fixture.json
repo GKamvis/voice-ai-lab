@@ -1,0 +1,109 @@
+{
+  "audio_file": "vad_fixture.wav",
+  "duration": 44.65,
+  "sample_rate": 16000,
+  "transcript": "Kursun proqramı qabaqcadan hazırlanmış video dərslərdən və hər dərsə aid olan tapşırıqlardan ibarətdir. Bu mövzumuzda integer və float, yəni tam və kəsrli ədəd tipli obyektlərdən danışacağıq. 1991-ci ilin fevral ayında Hollandiya Riyaziyyat və Kompüter Elmləri Mərkəzinin əməkdaşı Qvido Van Rossum o zamanlar yeni olan Python proqramlaşdırma dilinin mənbə kodunu nəşr etdi.",
+  "blocks": [
+    {
+      "label": "silence",
+      "start": 0.0,
+      "end": 5.0,
+      "source": null,
+      "modification": null
+    },
+    {
+      "label": "clean_speech",
+      "start": 5.0,
+      "end": 12.01,
+      "source": "01_clean.wav",
+      "modification": "unchanged"
+    },
+    {
+      "label": "silence",
+      "start": 12.01,
+      "end": 14.01,
+      "source": null,
+      "modification": null
+    },
+    {
+      "label": "quiet_speech",
+      "start": 14.01,
+      "end": 19.32,
+      "source": "05_technical.wav",
+      "modification": "gain 0.08"
+    },
+    {
+      "label": "noise",
+      "start": 19.32,
+      "end": 26.32,
+      "source": null,
+      "modification": "seed 42 white noise RMS 0.02"
+    },
+    {
+      "label": "speech_noise",
+      "start": 26.32,
+      "end": 39.65,
+      "source": "04_numbers_names.wav",
+      "modification": "white noise at nominal 8 dB SNR"
+    },
+    {
+      "label": "silence",
+      "start": 39.65,
+      "end": 44.65,
+      "source": null,
+      "modification": null
+    }
+  ],
+  "attribution": {
+    "dataset": "https://huggingface.co/datasets/LocalDoc/azerbaijani_asr",
+    "author": "LocalDoc",
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "split": "train",
+    "revision": "a1b9796a0ebf66c71f9acf0e85abbd87cc2bd0d7",
+    "format": "WAV PCM signed 16-bit, 16000 Hz, mono",
+    "samples": [
+      {
+        "file": "01_clean.wav",
+        "row_index": 1,
+        "original_file": "2373616120803_1.wav",
+        "transcript": "Kursun proqramı qabaqcadan hazırlanmış video dərslərdən və hər dərsə aid olan tapşırıqlardan ibarətdir.",
+        "duration_seconds": 7.01,
+        "modification": "Format conversion only."
+      },
+      {
+        "file": "02_noise.wav",
+        "row_index": 6,
+        "original_file": "2373616120803_6.wav",
+        "transcript": "Kursun istənilən dərsini izləmək üçün həmin dərsin səhifəsinə daxil olmaq lazımdır.",
+        "duration_seconds": 5.47,
+        "modification": "Added deterministic white noise at 12 dB SNR; simulated noisy speech."
+      },
+      {
+        "file": "03_fast_speech.wav",
+        "row_index": 8,
+        "original_file": "2373616120803_8.wav",
+        "transcript": "Hər izlənilmiş dərs və hər həll edilmiş tapşırıq həmin tələbənin kursun materiallarını keçmə sayını və faizini artırır.",
+        "duration_seconds": 6.798,
+        "modification": "FFmpeg atempo=1.35; simulated fast speech, pitch preserved."
+      },
+      {
+        "file": "04_numbers_names.wav",
+        "row_index": 30,
+        "original_file": "5029808658524_0.wav",
+        "transcript": "1991-ci ilin fevral ayında Hollandiya Riyaziyyat və Kompüter Elmləri Mərkəzinin əməkdaşı Qvido Van Rossum o zamanlar yeni olan Python proqramlaşdırma dilinin mənbə kodunu nəşr etdi.",
+        "duration_seconds": 13.33,
+        "modification": "Format conversion only; year, place and person name."
+      },
+      {
+        "file": "05_technical.wav",
+        "row_index": 61,
+        "original_file": "3390780782774_0.wav",
+        "transcript": "Bu mövzumuzda integer və float, yəni tam və kəsrli ədəd tipli obyektlərdən danışacağıq.",
+        "duration_seconds": 5.31,
+        "modification": "Format conversion only; Python integer and float terminology."
+      }
+    ]
+  },
+  "note": "Synthetic conditions from real recordings. Block boundaries are NOT word-level speech ground truth; source transcripts not manually verified."
+}

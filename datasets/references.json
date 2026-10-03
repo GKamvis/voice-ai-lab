@@ -1,0 +1,22 @@
+[
+    {
+      "audio": "01_clean.wav",
+      "reference": "Kursun proqramı qabaqcadan hazırlanmış video dərslərdən və hər dərsə aid olan tapşırıqlardan ibarətdir."
+    },
+    {
+      "audio": "02_noise.wav",
+      "reference": "Kursun istənilən dərsini izləmək üçün həmin dərsin səhifəsinə daxil olmaq lazımdır."
+    },
+    {
+      "audio": "03_fast_speech.wav",
+      "reference": "Hər izlənilmiş dərs və hər həll edilmiş tapşırıq həmin tələbənin kursun materiallarını keçmə sayını və faizini artırır."
+    },
+    {
+      "audio": "04_numbers_names.wav",
+      "reference": "1991-ci ilin fevral ayında Hollandiya Riyaziyyat və Kompüter Elmləri Mərkəzinin əməkdaşı Guido van Rossum o zamanlar yeni olan Python proqramlaşdırma dilinin mənbə kodunu nəşr etdi."
+    },
+    {
+      "audio": "05_technical.wav",
+      "reference": "Mövzumuzda integer və float, yəni tam və kəsrli ədəd tipli obyektlərdən danışılır."
+    }
+  ]

@@ -1,0 +1,21 @@
+{
+  "platform": "macOS-26.1-arm64-arm-64bit",
+  "threads": 4,
+  "device": "cpu",
+  "options": {
+    "language": "az",
+    "task": "transcribe",
+    "fp16": false,
+    "temperature": 0.0,
+    "beam_size": 5,
+    "condition_on_previous_text": false,
+    "verbose": null
+  },
+  "versions": {
+    "numpy": "2.0.2",
+    "torch": "2.8.0",
+    "openai-whisper": "20250625",
+    "silero-vad": "6.2.3"
+  },
+  "note": "Warm inference, audio loading and model loading excluded. VAD, padding and per-segment ASR included. RTF uses original audio duration. Energy threshold 0.03, frames 30 ms. Padding 200/300 ms; overlapping ranges merged. Seeded shuffled variant order."
+}

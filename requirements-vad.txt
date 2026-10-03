@@ -1,0 +1,5 @@
+# Local CPU Whisper + Silero experiment (Python 3.9 environment tested).
+numpy==2.0.2
+torch==2.8.0
+openai-whisper==20250625
+silero-vad==6.2.3
