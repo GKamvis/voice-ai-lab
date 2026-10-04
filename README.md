@@ -47,3 +47,28 @@ Mövcud LocalDoc yazılarından hazırlanır. Quiet speech gain=0.08, noise RMS=
 Beş variant: VAD-sız, Energy 0.03, Energy + padding, Silero, Silero + padding. Variant sırası hər təkrarda deterministik qarışdırılır. CPU, 4 thread, eyni Whisper modeli və decoding parametrləri istifadə edilir. Model/audio yükləmə və isinmə ölçülmür; VAD, padding, kəsmə, ASR və birləşdirmə ümumi inference vaxtına daxildir. `RTF = ümumi inference vaxtı / ilkin audio müddəti`.
 
 WER/CER əvvəlki `benchmark/evaluate.py` normalizasiyasını və edit-distance hesablamasını istifadə edir: Azərbaycan registr qaydaları, durğu işarələrinin çıxarılması, CER-də boşluqların çıxarılması. Padding accuracy-yə kömək edə və segment sayını azalda bilər; sürət üstünlüyü əvvəlcədən qəbul edilmir. Tək süni nümunə üzrə nəticə ümumi keyfiyyət zəmanəti deyil.
+
+## Real-time mikrofon və streaming benchmark
+
+```sh
+.venv/bin/pip install -r requirements-streaming.txt
+# 16 kHz mono, 480 sample = 30 ms; 690 ms silence → endpoint
+.venv/bin/python -m app.streaming.streaming_asr --seconds 30
+# Mikrofon əvəzinə eyni pipeline-a real vaxt sürəti ilə WAV:
+.venv/bin/python -m app.streaming.streaming_asr --wav samples/04_numbers_names.wav --output benchmark/streaming_results/realtime_replay.json
+.venv/bin/python -m benchmark.streaming_compare
+# Öz 10–20 saniyəlik yazınız və əl ilə yoxlanılmış transkript:
+.venv/bin/python -m benchmark.streaming_compare --audio benchmark/live_results.wav --reference reference.txt
+```
+
+`--device` ilə sounddevice cihaz indeksini seçmək mümkündür. macOS mikrofon icazəsi istəyə bilər. Model əvvəlcədən yüklənir və isindirilir. Mikrofon hazır mesajından sonra danışın; Ctrl-C yazını bitirir və gözləyən ASR işlərini tamamlayır. WAV və JSON `benchmark/live_results.*` fayllarına yazılır. Təkrar çağırış həmin output-u əvəz edir.
+
+Mövcud RMS detektoru (`threshold=0.03`) hər frame-də işləyir. 210 ms pre-roll söz başlanğıcını saxlayır; qısa pauzalar audio buffer-də qalır. 690 ms səssizlik endpoint yaradır. 30 saniyəlik limit uzun fasiləsiz çıxışı hissələrə bölür (`max_duration`); EOF ayrıca qeyd olunur, bunlar təbii endpoint deyil. Küy speech sayıla bilər, zəif səs isə itə bilər; threshold mikrofonun gain-inə həssasdır.
+
+Capture callback yalnız frame-ləri bounded queue-ya əlavə edir; ASR ayrıca thread-də işləyir. Capture və ASR növbəsi daşanda səssiz frame itirmək əvəzinə xəta verilir. Audio sample vaxtı PortAudio ADC saatından monotonic saata çevrilir. JSON-da speech end, endpoint aşkarlanması, ASR start və transcript ready timestamp-ləri saxlanılır. `total_latency = endpoint_delay + queue_delay + asr_inference`. Speech duration ilk və son speech frame arasındakı müddətdir, aradakı pauzalar daxildir. Danışığın sonu RMS-in son speech frame-i ilə təxmin olunur; əl ilə annotasiya edilmiş akustik son deyil. WAV replay nəticələri real wall-clock ölçüləridir, mikrofon/ADC latency-sini ölçmür.
+
+Benchmark-da `No VAD` 5 saniyəlik hissələri gəldikcə transkripsiya edir. `VAD` endpoint-də bütöv utterance verir. `VAD + overlap` endpoint-də həmin utterance-ı 5 saniyəlik, 1 saniyə overlap olan hissələrə bölür. Sonuncu strategiya kontekst müqayisəsidir və utterance bitməmiş nəticə vermir. Ayrı `boundary_overlap.json` VAD-sız 0–5, 4–9, 8–13… pəncərələrini yoxlayır: bunu `No VAD` ilə müqayisə etmək overlap təsirini ayırır.
+
+`runs.json` bütün chunk mətnlərini və sərhədlərini saxlayır. Overlap birləşdirməsi yalnız normallaşdırılmış dəqiq suffix/prefix uyğunluğunu silir; ASR eyni sözü fərqli yazarsa dublikat qala bilər, həqiqi təkrar da silinə bilər. Raw transkript və raw WER buna görə ayrıca saxlanılır. Söz timestamp-ləri/əl annotasiyası olmadan konkret səhvin sərhəd səbəbli olduğunu qəti demək olmaz.
+
+`summary.csv`: WER, processing time, RTF və **simulyasiya edilmiş** latency. ASR vaxtı faktiki ölçülür; stream cədvəli audio sample saatı və tək ASR worker əsasında modelləşdirilir. Latency fayl sonundan son nəticəyədək hesablanır; canlı latency deyil. RTF = VAD + ASR + birləşdirmə emal vaxtı / ilkin audio müddəti. Audio/model yükləmə və warm-up daxil deyil. VAD üçün 1 saniyə səssizlik əlavə edilir, RTF denominator-una daxil edilmir. Bir nümunə, bir təkrar və yoxlanılmamış dataset transkripti ümumi keyfiyyət nəticəsi vermir.

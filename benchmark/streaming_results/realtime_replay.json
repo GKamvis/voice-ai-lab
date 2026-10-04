@@ -1,0 +1,19 @@
+{
+  "source": "samples/04_numbers_names.wav",
+  "results": [
+    {
+      "text": "1991. fevrağı inda, Hollanda, Riyaziyat ve Computer Elimleri Merkezinin Emektaşı, Gvidevan Rostum o zamanlar yeni olan Payton Programlaştırmad dilinin MENB codeunu neşretti.",
+      "reason": "silence",
+      "speech_duration": 12.84,
+      "endpoint_delay": 0.6968713340000008,
+      "queue_delay": 0.002683041000000941,
+      "asr_inference": 2.8316098340000018,
+      "total_latency": 3.5311642090000035,
+      "speech_end": 24.772207165999998,
+      "vad_detected": 25.4690785,
+      "asr_started": 25.471761541,
+      "transcript_ready": 28.303371375
+    }
+  ],
+  "errors": []
+}

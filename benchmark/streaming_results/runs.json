@@ -1,0 +1,121 @@
+[
+  {
+    "method": "No VAD",
+    "WER": 0.8076923076923077,
+    "raw_WER": 0.8076923076923077,
+    "transcript": "1991. fevrā inda, Hollanda, Riyaziyat ve Kampitremdə... mərkəzinin əməktaşı qüvidəvam rostum o zamanlar yeni olan pay Pək təm programla stürmərdilinin mənbək ordunu nəşrətdir.",
+    "raw_transcript": "1991. fevrā inda, Hollanda, Riyaziyat ve Kampitremdə... mərkəzinin əməktaşı qüvidəvam rostum o zamanlar yeni olan pay Pək təm programla stürmərdilinin mənbək ordunu nəşrətdir.",
+    "chunks": [
+      {
+        "start": 0.0,
+        "end": 5.0,
+        "available": 5.0,
+        "speech_end": null,
+        "text": "1991. fevrā inda, Hollanda, Riyaziyat ve Kampitremdə...",
+        "inference": 1.1466455829999997,
+        "simulated_ready": 6.146645583,
+        "queue_delay": 0.0
+      },
+      {
+        "start": 5.0,
+        "end": 10.0,
+        "available": 10.0,
+        "speech_end": null,
+        "text": "mərkəzinin əməktaşı qüvidəvam rostum o zamanlar yeni olan pay",
+        "inference": 1.7349013749999997,
+        "simulated_ready": 11.734901375,
+        "queue_delay": 0.0
+      },
+      {
+        "start": 10.0,
+        "end": 13.33,
+        "available": 13.33,
+        "speech_end": null,
+        "text": "Pək təm programla stürmərdilinin mənbək ordunu nəşrətdir.",
+        "inference": 1.2468514160000002,
+        "simulated_ready": 14.576851416,
+        "queue_delay": 0.0
+      }
+    ],
+    "processing_time": 4.128435250000001,
+    "vad_time": 1.94170000007432e-05,
+    "RTF": 0.309710071267817,
+    "simulated_latency_from_file_end": 1.2468514160000002
+  },
+  {
+    "method": "VAD",
+    "WER": 0.7692307692307693,
+    "raw_WER": 0.7692307692307693,
+    "transcript": "1991. fevrağı inda, Hollanda, Riyaziyat ve Computer elimlerim erkezinin emektaşı, Gvidevan Rostum o zamanlar yeni olan Payton Programlaştırmad dilinin MENB codeunu neşret.",
+    "raw_transcript": "1991. fevrağı inda, Hollanda, Riyaziyat ve Computer elimlerim erkezinin emektaşı, Gvidevan Rostum o zamanlar yeni olan Payton Programlaştırmad dilinin MENB codeunu neşret.",
+    "chunks": [
+      {
+        "start": 0.0,
+        "end": 13.11,
+        "available": 13.65,
+        "speech_end": 12.96,
+        "text": "1991. fevrağı inda, Hollanda, Riyaziyat ve Computer elimlerim erkezinin emektaşı, Gvidevan Rostum o zamanlar yeni olan Payton Programlaştırmad dilinin MENB codeunu neşret.",
+        "inference": 2.7301209580000005,
+        "simulated_ready": 16.380120958,
+        "queue_delay": 0.0
+      }
+    ],
+    "processing_time": 2.7378087499999975,
+    "vad_time": 0.007674041999999659,
+    "RTF": 0.20538700300075,
+    "simulated_latency_from_file_end": 3.050120957999999
+  },
+  {
+    "method": "VAD + overlap",
+    "WER": 0.9615384615384616,
+    "raw_WER": 0.9615384615384616,
+    "transcript": "1991. fevrā inda, Hollanda, Riyaziyat ve Kampitremdə... ve komputer elimlerim erkezinin emektaşı güvidevam rostum o zamanlar yı o zamanlar yeni olan Payton Programlaştırmad dilinin Menbe Code'u neşret. Ənbək oduru nəşrət",
+    "raw_transcript": "1991. fevrā inda, Hollanda, Riyaziyat ve Kampitremdə... ve komputer elimlerim erkezinin emektaşı güvidevam rostum o zamanlar yı o zamanlar yeni olan Payton Programlaştırmad dilinin Menbe Code'u neşret. Ənbək oduru nəşrət",
+    "chunks": [
+      {
+        "start": 0.0,
+        "end": 5.0,
+        "available": 13.65,
+        "speech_end": 12.96,
+        "text": "1991. fevrā inda, Hollanda, Riyaziyat ve Kampitremdə...",
+        "inference": 1.0668354999999998,
+        "simulated_ready": 14.7168355,
+        "queue_delay": 0.0
+      },
+      {
+        "start": 4.0,
+        "end": 9.0,
+        "available": 13.65,
+        "speech_end": 12.96,
+        "text": "ve komputer elimlerim erkezinin emektaşı güvidevam rostum o zamanlar yı",
+        "inference": 1.2332230840000022,
+        "simulated_ready": 15.950058584000002,
+        "queue_delay": 1.0668354999999998
+      },
+      {
+        "start": 8.0,
+        "end": 13.0,
+        "available": 13.65,
+        "speech_end": 12.96,
+        "text": "o zamanlar yeni olan Payton Programlaştırmad dilinin Menbe Code'u neşret.",
+        "inference": 1.390800249999998,
+        "simulated_ready": 17.340858834000002,
+        "queue_delay": 2.300058584000002
+      },
+      {
+        "start": 12.0,
+        "end": 13.11,
+        "available": 13.65,
+        "speech_end": 12.96,
+        "text": "Ənbək oduru nəşrət",
+        "inference": 0.7913043329999994,
+        "simulated_ready": 18.132163167,
+        "queue_delay": 3.690858834000002
+      }
+    ],
+    "processing_time": 4.488146499999999,
+    "vad_time": 0.005607459000000148,
+    "RTF": 0.3366951612903225,
+    "simulated_latency_from_file_end": 4.802163167000002
+  }
+]

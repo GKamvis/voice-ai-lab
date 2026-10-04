@@ -1,0 +1,22 @@
+{
+  "model": "base",
+  "device": "cpu",
+  "threads": 4,
+  "options": {
+    "language": "az",
+    "fp16": false,
+    "temperature": 0.0,
+    "beam_size": 5,
+    "condition_on_previous_text": false,
+    "verbose": null
+  },
+  "platform": "macOS-26.1-arm64-arm-64bit",
+  "audio": "/Users/kamvis/Development/voice-ai-lab/voice-ai-lab/samples/04_numbers_names.wav",
+  "duration": 13.33,
+  "reference": "1991-ci ilin fevral ayında Hollandiya Riyaziyyat və Kompüter Elmləri Mərkəzinin əməkdaşı Qvido Van Rossum o zamanlar yeni olan Python proqramlaşdırma dilinin mənbə kodunu nəşr etdi.",
+  "frame_ms": 30,
+  "silence_ms": 690,
+  "threshold": 0.03,
+  "latency": "Simulated serial worker scheduling from file end; measured ASR inference; excludes capture and OS scheduling.",
+  "repeats": 1
+}

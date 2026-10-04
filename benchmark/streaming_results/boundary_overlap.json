@@ -1,0 +1,53 @@
+{
+  "method": "Boundary overlap",
+  "WER": 0.8846153846153846,
+  "raw_WER": 0.8846153846153846,
+  "transcript": "1991. fevrā inda, Hollanda, Riyaziyat ve Kampitremdə... ve komputer elimlerim erkezinin emektaşı güvidevam rostum o zamanlar yı o zamanlar yeni olan Payton Programlaştırmad dilinin Menbe Code'u neşret. nəşrətti.",
+  "raw_transcript": "1991. fevrā inda, Hollanda, Riyaziyat ve Kampitremdə... ve komputer elimlerim erkezinin emektaşı güvidevam rostum o zamanlar yı o zamanlar yeni olan Payton Programlaştırmad dilinin Menbe Code'u neşret. nəşrətti.",
+  "chunks": [
+    {
+      "start": 0.0,
+      "end": 5.0,
+      "available": 5.0,
+      "speech_end": null,
+      "text": "1991. fevrā inda, Hollanda, Riyaziyat ve Kampitremdə...",
+      "inference": 1.1254284589999983,
+      "simulated_ready": 6.125428458999998,
+      "queue_delay": 0.0
+    },
+    {
+      "start": 4.0,
+      "end": 9.0,
+      "available": 9.0,
+      "speech_end": null,
+      "text": "ve komputer elimlerim erkezinin emektaşı güvidevam rostum o zamanlar yı",
+      "inference": 1.3828306670000003,
+      "simulated_ready": 10.382830667,
+      "queue_delay": 0.0
+    },
+    {
+      "start": 8.0,
+      "end": 13.0,
+      "available": 13.0,
+      "speech_end": null,
+      "text": "o zamanlar yeni olan Payton Programlaştırmad dilinin Menbe Code'u neşret.",
+      "inference": 0.9158234169999986,
+      "simulated_ready": 13.915823416999999,
+      "queue_delay": 0.0
+    },
+    {
+      "start": 12.0,
+      "end": 13.33,
+      "available": 13.33,
+      "speech_end": null,
+      "text": "nəşrətti.",
+      "inference": 0.4954955840000004,
+      "simulated_ready": 14.411319000999999,
+      "queue_delay": 0.5858234169999985
+    }
+  ],
+  "processing_time": 3.919853374999999,
+  "vad_time": 6.91599999669279e-06,
+  "RTF": 0.2940625187546886,
+  "simulated_latency_from_file_end": 1.081319000999999
+}
