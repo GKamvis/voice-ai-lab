@@ -87,7 +87,7 @@ class APITests(unittest.TestCase):
         self.assertEqual(response.json(), {'detail': 'Audio processing failed'})
         self.assertFalse(self.service.lock.locked())
 
-    def test_health_stays_responsive_and_second_request_is_busy(self):
+    def test_health_stays_responsive_and_second_request_is_queued(self):
         entered, release = threading.Event(), threading.Event()
         def slow(*args, **kwargs):
             entered.set()
@@ -100,11 +100,17 @@ class APITests(unittest.TestCase):
         try:
             self.assertTrue(entered.wait(5))
             self.assertEqual(self.client.get('/health').status_code, 200)
-            self.assertEqual(self.post('b.wav', wav()).status_code, 503)
+            second = threading.Thread(target=lambda: results.append(self.post('b.wav', wav())))
+            second.start()
+            self.assertEqual(self.model.transcribe.call_count, 1)
         finally:
             release.set()
             worker.join(5)
-        self.assertEqual(results[0].status_code, 200)
+            if 'second' in locals():
+                second.join(5)
+        self.assertEqual(len(results), 2)
+        self.assertTrue(all(r.status_code == 200 for r in results))
+        self.assertNotEqual(results[0].json()['request_id'], results[1].json()['request_id'])
 
     def test_size_and_duration_limits(self):
         from unittest.mock import patch

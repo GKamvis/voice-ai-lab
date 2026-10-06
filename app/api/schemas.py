@@ -14,6 +14,7 @@ class Segment(BaseModel):
 
 
 class TranscriptionResponse(BaseModel):
+    request_id: str
     language: str
     duration: float = Field(gt=0)
     processing_time: float = Field(ge=0)

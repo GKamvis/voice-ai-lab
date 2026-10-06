@@ -1,0 +1,14 @@
+{
+  "platform": "macOS-26.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "python": "3.9.6",
+  "model": "base",
+  "device": "cpu",
+  "torch_threads": 4,
+  "queue_size": 10,
+  "request_timeout_seconds": 300,
+  "execution": "local uvicorn, single process; not Docker",
+  "completed_including_warmup": 17,
+  "max_observed_queue": 9,
+  "serial_processing_verified": true
+}

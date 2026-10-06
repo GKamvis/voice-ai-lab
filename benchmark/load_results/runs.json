@@ -1,0 +1,404 @@
+{
+  "timestamp": "2026-10-06T17:55:45.978000+00:00",
+  "url": "http://127.0.0.1:8010",
+  "audio": "samples/01_clean.wav",
+  "health": {
+    "status": "healthy",
+    "model": "whisper-base"
+  },
+  "warmup": true,
+  "timeout": 360,
+  "runs": [
+    {
+      "summary": {
+        "concurrent_requests": 1,
+        "avg_latency": 2.233132416,
+        "min_latency": 2.233132416,
+        "max_latency": 2.233132416,
+        "total_time": 2.2332443750000004,
+        "success_count": 1,
+        "failure_count": 0
+      },
+      "requests": [
+        {
+          "index": 0,
+          "latency": 2.233132416,
+          "success": true,
+          "status": 200,
+          "request_id": "07c10bb0-e3d3-4948-8bab-b6e39e181458",
+          "body": {
+            "request_id": "07c10bb0-e3d3-4948-8bab-b6e39e181458",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.230187041999999,
+            "rtf": 0.3181436579172609,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "summary": {
+        "concurrent_requests": 5,
+        "avg_latency": 6.6454783664,
+        "min_latency": 2.2056062909999996,
+        "max_latency": 11.109095166,
+        "total_time": 11.109836957999999,
+        "success_count": 5,
+        "failure_count": 0
+      },
+      "requests": [
+        {
+          "index": 0,
+          "latency": 2.2056062909999996,
+          "success": true,
+          "status": 200,
+          "request_id": "632c841a-0bcf-46f3-a0a3-0221fc83042e",
+          "body": {
+            "request_id": "632c841a-0bcf-46f3-a0a3-0221fc83042e",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.2001139999999992,
+            "rtf": 0.3138536376604849,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "latency": 8.865279333,
+          "success": true,
+          "status": 200,
+          "request_id": "8a86d7e6-c4b4-4d31-b926-6c0f88e2a630",
+          "body": {
+            "request_id": "8a86d7e6-c4b4-4d31-b926-6c0f88e2a630",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.2400094579999994,
+            "rtf": 0.3195448584878744,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 2,
+          "latency": 11.109095166,
+          "success": true,
+          "status": 200,
+          "request_id": "f630dcc9-5097-46c2-869f-22aa8992eb00",
+          "body": {
+            "request_id": "f630dcc9-5097-46c2-869f-22aa8992eb00",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.2435484999999993,
+            "rtf": 0.3200497146932952,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 3,
+          "latency": 6.623832625,
+          "success": true,
+          "status": 200,
+          "request_id": "922600b9-41f7-48b3-ade2-8b69542485f0",
+          "body": {
+            "request_id": "922600b9-41f7-48b3-ade2-8b69542485f0",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.1993906669999994,
+            "rtf": 0.31375045178316685,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 4,
+          "latency": 4.423578416999999,
+          "success": true,
+          "status": 200,
+          "request_id": "1fc40ba1-04ce-4a30-8749-30feeb96da2e",
+          "body": {
+            "request_id": "1fc40ba1-04ce-4a30-8749-30feeb96da2e",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.2184377909999995,
+            "rtf": 0.316467587874465,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "summary": {
+        "concurrent_requests": 10,
+        "avg_latency": 12.2605521958,
+        "min_latency": 2.2254481669999997,
+        "max_latency": 22.283731458,
+        "total_time": 22.28568875,
+        "success_count": 10,
+        "failure_count": 0
+      },
+      "requests": [
+        {
+          "index": 0,
+          "latency": 2.2254481669999997,
+          "success": true,
+          "status": 200,
+          "request_id": "24904727-fe84-4c5d-b587-0eecaa6a132e",
+          "body": {
+            "request_id": "24904727-fe84-4c5d-b587-0eecaa6a132e",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.218319000000001,
+            "rtf": 0.31645064194008576,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "latency": 6.680233916000002,
+          "success": true,
+          "status": 200,
+          "request_id": "cac4ca6d-a388-4d04-ba77-85c6a5bf7399",
+          "body": {
+            "request_id": "cac4ca6d-a388-4d04-ba77-85c6a5bf7399",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.2189020829999997,
+            "rtf": 0.31653382068473607,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 2,
+          "latency": 11.146333917,
+          "success": true,
+          "status": 200,
+          "request_id": "87f17457-6387-489c-8820-2a8836330221",
+          "body": {
+            "request_id": "87f17457-6387-489c-8820-2a8836330221",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.2280717920000015,
+            "rtf": 0.3178419104136949,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 3,
+          "latency": 20.064549834,
+          "success": true,
+          "status": 200,
+          "request_id": "8f54aeca-f4ad-43c7-9df1-51023816baa3",
+          "body": {
+            "request_id": "8f54aeca-f4ad-43c7-9df1-51023816baa3",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.227607750000004,
+            "rtf": 0.3177757132667624,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 4,
+          "latency": 4.459849082999998,
+          "success": true,
+          "status": 200,
+          "request_id": "35d376aa-be4f-4e40-9553-2cbf231b3919",
+          "body": {
+            "request_id": "35d376aa-be4f-4e40-9553-2cbf231b3919",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.234917708000001,
+            "rtf": 0.3188185032810273,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 5,
+          "latency": 15.607835499999997,
+          "success": true,
+          "status": 200,
+          "request_id": "726ab02b-451f-48f6-bea7-a27c0e2d66b4",
+          "body": {
+            "request_id": "726ab02b-451f-48f6-bea7-a27c0e2d66b4",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.219592417000001,
+            "rtf": 0.3166322991440801,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 6,
+          "latency": 22.283731458,
+          "success": true,
+          "status": 200,
+          "request_id": "546ca318-edbc-47dd-b3fa-287701440757",
+          "body": {
+            "request_id": "546ca318-edbc-47dd-b3fa-287701440757",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.2193834159999994,
+            "rtf": 0.31660248445078454,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 7,
+          "latency": 8.916082416000002,
+          "success": true,
+          "status": 200,
+          "request_id": "11603047-9ca7-49ee-be94-3b80945c1975",
+          "body": {
+            "request_id": "11603047-9ca7-49ee-be94-3b80945c1975",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.2366767919999972,
+            "rtf": 0.31906944251069863,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 8,
+          "latency": 13.386672833999999,
+          "success": true,
+          "status": 200,
+          "request_id": "21d334b4-8aeb-4a1f-be74-94643dcaf037",
+          "body": {
+            "request_id": "21d334b4-8aeb-4a1f-be74-94643dcaf037",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.241223000000005,
+            "rtf": 0.3197179743223973,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        },
+        {
+          "index": 9,
+          "latency": 17.834784833000004,
+          "success": true,
+          "status": 200,
+          "request_id": "9b910a3b-d98c-428f-bcb8-d66836a2709a",
+          "body": {
+            "request_id": "9b910a3b-d98c-428f-bcb8-d66836a2709a",
+            "language": "az",
+            "duration": 7.01,
+            "processing_time": 2.2272430410000013,
+            "rtf": 0.31772368630527836,
+            "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t.",
+            "segments": [
+              {
+                "start": 0.0,
+                "end": 7.01,
+                "text": "Kursun program\u0131 kabakc\u0131d\u0131n haz\u0131rlanm\u0131\u015f video derslerden v\u0259 h\u0259r d\u0259rs\u0259 ayd\u0131 olan tap\u015f\u0131riklardan ibar\u0259t."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+services:
+  asr:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      ASR_MODEL: ${ASR_MODEL:-small}
+      ASR_QUEUE_SIZE: ${ASR_QUEUE_SIZE:-10}
+      ASR_REQUEST_TIMEOUT: ${ASR_REQUEST_TIMEOUT:-300}
+    volumes:
+      - model-cache:/root/.cache/whisper
+    stop_grace_period: 6m
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)"]
+      interval: 10s
+      timeout: 3s
+      start_period: 180s
+      retries: 3
+volumes:
+  model-cache:

@@ -1,3 +1,4 @@
+import logging
 import subprocess
 import threading
 import time
@@ -12,6 +13,7 @@ MAX_UPLOAD_BYTES = 25 * 1024 * 1024
 MAX_DURATION = 300
 MIN_DURATION = 0.25
 SR = 16000
+logger = logging.getLogger('uvicorn.error')
 
 
 class AudioValidationError(ValueError):
@@ -29,7 +31,7 @@ class TranscriptionService:
         self.model_name = model_name
         self.lock = threading.Lock()
 
-    def transcribe(self, upload):
+    def transcribe(self, upload, request_id=None):
         # Fail fast instead of building an unbounded inference queue. Silero and
         # Whisper share mutable state and must not run concurrent inference.
         if not self.lock.acquire(blocking=False):
@@ -37,7 +39,9 @@ class TranscriptionService:
         started = time.perf_counter()
         try:
             with TemporaryDirectory(prefix='asr-') as directory:
+                logger.info('[request_id=%s] preprocessing', request_id)
                 audio = self._prepare(upload, Path(directory))
+                logger.info('[request_id=%s] inference', request_id)
                 result = transcribe(
                     self.model, audio, detector=self.detector, pre_ms=200, post_ms=300,
                     language='az', fp16=False, temperature=0.0, beam_size=5,

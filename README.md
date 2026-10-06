@@ -72,3 +72,18 @@ Benchmark-da `No VAD` 5 saniyəlik hissələri gəldikcə transkripsiya edir. `V
 `runs.json` bütün chunk mətnlərini və sərhədlərini saxlayır. Overlap birləşdirməsi yalnız normallaşdırılmış dəqiq suffix/prefix uyğunluğunu silir; ASR eyni sözü fərqli yazarsa dublikat qala bilər, həqiqi təkrar da silinə bilər. Raw transkript və raw WER buna görə ayrıca saxlanılır. Söz timestamp-ləri/əl annotasiyası olmadan konkret səhvin sərhəd səbəbli olduğunu qəti demək olmaz.
 
 `summary.csv`: WER, processing time, RTF və **simulyasiya edilmiş** latency. ASR vaxtı faktiki ölçülür; stream cədvəli audio sample saatı və tək ASR worker əsasında modelləşdirilir. Latency fayl sonundan son nəticəyədək hesablanır; canlı latency deyil. RTF = VAD + ASR + birləşdirmə emal vaxtı / ilkin audio müddəti. Audio/model yükləmə və warm-up daxil deyil. VAD üçün 1 saniyə səssizlik əlavə edilir, RTF denominator-una daxil edilmir. Bir nümunə, bir təkrar və yoxlanılmamış dataset transkripti ümumi keyfiyyət nəticəsi vermir.
+
+## Concurrent API, queue və Docker Compose
+
+[Təcrübə və anlayışların izahı](docs/concurrency.md). Endpoint indi async-dir; limitli `asyncio.Queue` və tək ASR worker ilə request-lər ardıcıl emal edilir. UUID loglarda və response-da verilir.
+
+```sh
+ASR_MODEL=base docker compose up --build
+docker compose ps
+docker compose logs -f
+# Ayrı terminalda:
+.venv/bin/pip install -r requirements-api.txt
+.venv/bin/python tests/load_test.py --audio samples/01_clean.wav --warmup
+```
+
+Ölçülər: [nəticə cədvəli](benchmark/load_results/summary.md), CSV və hər request üçün JSON. Default `ASR_QUEUE_SIZE=10`, `ASR_REQUEST_TIMEOUT=300`; dolu queue `503`, vaxt limiti `504` qaytarır. Docker image default olaraq tək Uvicorn worker ilə işləyir.

@@ -1,0 +1,127 @@
+INFO:     Started server process [33683]
+INFO:     Waiting for application startup.
+INFO:     Model loading time: 0.786 s (whisper-base)
+INFO:     Service startup time: 2.233 s
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8010 (Press CTRL+C to quit)
+INFO:     127.0.0.1:50300 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50301 - "GET /health HTTP/1.1" 200 OK
+INFO:     [request_id=bdf07cfa-9d48-4215-b260-8458d92854cc] received
+INFO:     [request_id=bdf07cfa-9d48-4215-b260-8458d92854cc] queued queue_size=1
+INFO:     [request_id=bdf07cfa-9d48-4215-b260-8458d92854cc] processing queue_size=0
+INFO:     [request_id=bdf07cfa-9d48-4215-b260-8458d92854cc] preprocessing
+INFO:     [request_id=bdf07cfa-9d48-4215-b260-8458d92854cc] inference
+INFO:     [request_id=bdf07cfa-9d48-4215-b260-8458d92854cc] completed
+INFO:     127.0.0.1:50301 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=07c10bb0-e3d3-4948-8bab-b6e39e181458] received
+INFO:     [request_id=07c10bb0-e3d3-4948-8bab-b6e39e181458] queued queue_size=1
+INFO:     [request_id=07c10bb0-e3d3-4948-8bab-b6e39e181458] processing queue_size=0
+INFO:     [request_id=07c10bb0-e3d3-4948-8bab-b6e39e181458] preprocessing
+INFO:     [request_id=07c10bb0-e3d3-4948-8bab-b6e39e181458] inference
+INFO:     [request_id=07c10bb0-e3d3-4948-8bab-b6e39e181458] completed
+INFO:     127.0.0.1:50301 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=632c841a-0bcf-46f3-a0a3-0221fc83042e] received
+INFO:     [request_id=632c841a-0bcf-46f3-a0a3-0221fc83042e] queued queue_size=1
+INFO:     [request_id=632c841a-0bcf-46f3-a0a3-0221fc83042e] processing queue_size=0
+INFO:     [request_id=632c841a-0bcf-46f3-a0a3-0221fc83042e] preprocessing
+INFO:     [request_id=1fc40ba1-04ce-4a30-8749-30feeb96da2e] received
+INFO:     [request_id=1fc40ba1-04ce-4a30-8749-30feeb96da2e] queued queue_size=1
+INFO:     [request_id=922600b9-41f7-48b3-ade2-8b69542485f0] received
+INFO:     [request_id=922600b9-41f7-48b3-ade2-8b69542485f0] queued queue_size=2
+INFO:     [request_id=8a86d7e6-c4b4-4d31-b926-6c0f88e2a630] received
+INFO:     [request_id=8a86d7e6-c4b4-4d31-b926-6c0f88e2a630] queued queue_size=3
+INFO:     [request_id=f630dcc9-5097-46c2-869f-22aa8992eb00] received
+INFO:     [request_id=f630dcc9-5097-46c2-869f-22aa8992eb00] queued queue_size=4
+INFO:     [request_id=632c841a-0bcf-46f3-a0a3-0221fc83042e] inference
+INFO:     [request_id=632c841a-0bcf-46f3-a0a3-0221fc83042e] completed
+INFO:     [request_id=1fc40ba1-04ce-4a30-8749-30feeb96da2e] processing queue_size=3
+INFO:     127.0.0.1:50301 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=1fc40ba1-04ce-4a30-8749-30feeb96da2e] preprocessing
+INFO:     [request_id=1fc40ba1-04ce-4a30-8749-30feeb96da2e] inference
+INFO:     [request_id=1fc40ba1-04ce-4a30-8749-30feeb96da2e] completed
+INFO:     [request_id=922600b9-41f7-48b3-ade2-8b69542485f0] processing queue_size=2
+INFO:     127.0.0.1:50310 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=922600b9-41f7-48b3-ade2-8b69542485f0] preprocessing
+INFO:     [request_id=922600b9-41f7-48b3-ade2-8b69542485f0] inference
+INFO:     [request_id=922600b9-41f7-48b3-ade2-8b69542485f0] completed
+INFO:     [request_id=8a86d7e6-c4b4-4d31-b926-6c0f88e2a630] processing queue_size=1
+INFO:     127.0.0.1:50309 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=8a86d7e6-c4b4-4d31-b926-6c0f88e2a630] preprocessing
+INFO:     [request_id=8a86d7e6-c4b4-4d31-b926-6c0f88e2a630] inference
+INFO:     [request_id=8a86d7e6-c4b4-4d31-b926-6c0f88e2a630] completed
+INFO:     [request_id=f630dcc9-5097-46c2-869f-22aa8992eb00] processing queue_size=0
+INFO:     127.0.0.1:50307 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=f630dcc9-5097-46c2-869f-22aa8992eb00] preprocessing
+INFO:     [request_id=f630dcc9-5097-46c2-869f-22aa8992eb00] inference
+INFO:     [request_id=f630dcc9-5097-46c2-869f-22aa8992eb00] completed
+INFO:     127.0.0.1:50308 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=24904727-fe84-4c5d-b587-0eecaa6a132e] received
+INFO:     [request_id=24904727-fe84-4c5d-b587-0eecaa6a132e] queued queue_size=1
+INFO:     [request_id=24904727-fe84-4c5d-b587-0eecaa6a132e] processing queue_size=0
+INFO:     [request_id=24904727-fe84-4c5d-b587-0eecaa6a132e] preprocessing
+INFO:     [request_id=35d376aa-be4f-4e40-9553-2cbf231b3919] received
+INFO:     [request_id=35d376aa-be4f-4e40-9553-2cbf231b3919] queued queue_size=1
+INFO:     [request_id=cac4ca6d-a388-4d04-ba77-85c6a5bf7399] received
+INFO:     [request_id=cac4ca6d-a388-4d04-ba77-85c6a5bf7399] queued queue_size=2
+INFO:     [request_id=11603047-9ca7-49ee-be94-3b80945c1975] received
+INFO:     [request_id=11603047-9ca7-49ee-be94-3b80945c1975] queued queue_size=3
+INFO:     [request_id=87f17457-6387-489c-8820-2a8836330221] received
+INFO:     [request_id=87f17457-6387-489c-8820-2a8836330221] queued queue_size=4
+INFO:     [request_id=21d334b4-8aeb-4a1f-be74-94643dcaf037] received
+INFO:     [request_id=21d334b4-8aeb-4a1f-be74-94643dcaf037] queued queue_size=5
+INFO:     [request_id=726ab02b-451f-48f6-bea7-a27c0e2d66b4] received
+INFO:     [request_id=726ab02b-451f-48f6-bea7-a27c0e2d66b4] queued queue_size=6
+INFO:     [request_id=9b910a3b-d98c-428f-bcb8-d66836a2709a] received
+INFO:     [request_id=9b910a3b-d98c-428f-bcb8-d66836a2709a] queued queue_size=7
+INFO:     [request_id=8f54aeca-f4ad-43c7-9df1-51023816baa3] received
+INFO:     [request_id=8f54aeca-f4ad-43c7-9df1-51023816baa3] queued queue_size=8
+INFO:     [request_id=546ca318-edbc-47dd-b3fa-287701440757] received
+INFO:     [request_id=546ca318-edbc-47dd-b3fa-287701440757] queued queue_size=9
+INFO:     [request_id=24904727-fe84-4c5d-b587-0eecaa6a132e] inference
+INFO:     [request_id=24904727-fe84-4c5d-b587-0eecaa6a132e] completed
+INFO:     [request_id=35d376aa-be4f-4e40-9553-2cbf231b3919] processing queue_size=8
+INFO:     127.0.0.1:50307 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=35d376aa-be4f-4e40-9553-2cbf231b3919] preprocessing
+INFO:     [request_id=35d376aa-be4f-4e40-9553-2cbf231b3919] inference
+INFO:     [request_id=35d376aa-be4f-4e40-9553-2cbf231b3919] completed
+INFO:     [request_id=cac4ca6d-a388-4d04-ba77-85c6a5bf7399] processing queue_size=7
+INFO:     127.0.0.1:50309 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=cac4ca6d-a388-4d04-ba77-85c6a5bf7399] preprocessing
+INFO:     [request_id=cac4ca6d-a388-4d04-ba77-85c6a5bf7399] inference
+INFO:     [request_id=cac4ca6d-a388-4d04-ba77-85c6a5bf7399] completed
+INFO:     [request_id=11603047-9ca7-49ee-be94-3b80945c1975] processing queue_size=6
+INFO:     127.0.0.1:50308 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=11603047-9ca7-49ee-be94-3b80945c1975] preprocessing
+INFO:     [request_id=11603047-9ca7-49ee-be94-3b80945c1975] inference
+INFO:     [request_id=11603047-9ca7-49ee-be94-3b80945c1975] completed
+INFO:     [request_id=87f17457-6387-489c-8820-2a8836330221] processing queue_size=5
+INFO:     127.0.0.1:50322 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=87f17457-6387-489c-8820-2a8836330221] preprocessing
+INFO:     [request_id=87f17457-6387-489c-8820-2a8836330221] inference
+INFO:     [request_id=87f17457-6387-489c-8820-2a8836330221] completed
+INFO:     [request_id=21d334b4-8aeb-4a1f-be74-94643dcaf037] processing queue_size=4
+INFO:     127.0.0.1:50323 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=21d334b4-8aeb-4a1f-be74-94643dcaf037] preprocessing
+INFO:     [request_id=21d334b4-8aeb-4a1f-be74-94643dcaf037] inference
+INFO:     [request_id=21d334b4-8aeb-4a1f-be74-94643dcaf037] completed
+INFO:     [request_id=726ab02b-451f-48f6-bea7-a27c0e2d66b4] processing queue_size=3
+INFO:     127.0.0.1:50324 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=726ab02b-451f-48f6-bea7-a27c0e2d66b4] preprocessing
+INFO:     [request_id=726ab02b-451f-48f6-bea7-a27c0e2d66b4] inference
+INFO:     [request_id=726ab02b-451f-48f6-bea7-a27c0e2d66b4] completed
+INFO:     [request_id=9b910a3b-d98c-428f-bcb8-d66836a2709a] processing queue_size=2
+INFO:     127.0.0.1:50325 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=9b910a3b-d98c-428f-bcb8-d66836a2709a] preprocessing
+INFO:     [request_id=9b910a3b-d98c-428f-bcb8-d66836a2709a] inference
+INFO:     [request_id=9b910a3b-d98c-428f-bcb8-d66836a2709a] completed
+INFO:     [request_id=8f54aeca-f4ad-43c7-9df1-51023816baa3] processing queue_size=1
+INFO:     127.0.0.1:50326 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=8f54aeca-f4ad-43c7-9df1-51023816baa3] preprocessing
+INFO:     [request_id=8f54aeca-f4ad-43c7-9df1-51023816baa3] inference
+INFO:     [request_id=8f54aeca-f4ad-43c7-9df1-51023816baa3] completed
+INFO:     [request_id=546ca318-edbc-47dd-b3fa-287701440757] processing queue_size=0
+INFO:     127.0.0.1:50327 - "POST /transcribe HTTP/1.1" 200 OK
+INFO:     [request_id=546ca318-edbc-47dd-b3fa-287701440757] preprocessing
+INFO:     [request_id=546ca318-edbc-47dd-b3fa-287701440757] inference
+INFO:     [request_id=546ca318-edbc-47dd-b3fa-287701440757] completed
+INFO:     127.0.0.1:50328 - "POST /transcribe HTTP/1.1" 200 OK
