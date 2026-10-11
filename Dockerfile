@@ -9,6 +9,7 @@ COPY requirements-api.txt requirements-vad.txt ./
 RUN pip install torch==2.8.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cpu \
     && pip install -r requirements-api.txt
 COPY --chown=asr:asr app ./app
+RUN mkdir -p /home/asr/.cache/whisper && chown -R asr:asr /home/asr/.cache
 USER asr
 EXPOSE 8000
 CMD ["uvicorn", "app.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1", "--no-access-log"]

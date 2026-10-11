@@ -29,6 +29,14 @@ jobs:
         run: docker compose config --quiet
       - name: Build CPU image
         run: docker build -t voice-ai-lab:local -f docker/Dockerfile .
+      - name: Check non-root model cache and production config
+        env:
+          API_TOKEN: ci-validation-only
+          GRAFANA_ADMIN_PASSWORD: ci-validation-only
+          API_DOMAIN: api.example.com
+        run: |
+          docker run --rm voice-ai-lab:local sh -c 'test -w /home/asr/.cache/whisper'
+          docker compose -f compose.prod.yaml config --quiet
       - name: Start integration stack with mocked Whisper
         run: docker compose -p speech-test -f compose.yaml -f compose.test.yaml up -d --no-build --wait speech-api asr-worker
       - name: Check real broker and worker recovery
