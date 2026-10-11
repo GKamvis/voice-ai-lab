@@ -12,7 +12,7 @@ from app.jobs import config, tasks
 from app.jobs.dispatcher import dispatch_once
 from app.jobs.store import JobStore, OUTBOX
 from app.services.transcription_service import TranscriptionService
-from test_api import wav
+from tests.test_api import wav
 
 
 @pytest.fixture

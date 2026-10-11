@@ -1,0 +1,41 @@
+name: Speech AI CI
+on:
+  push:
+    branches: [main, 'codex/**']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install FFmpeg and CPU dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          pip install torch==2.8.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+      - run: ruff check app/ tests/
+      - run: pytest tests/ -v
+      - name: Validate Compose
+        run: docker compose config --quiet
+      - name: Build CPU image
+        run: docker build -t voice-ai-lab:local -f docker/Dockerfile .
+      - name: Start integration stack with mocked Whisper
+        run: docker compose -p speech-test -f compose.yaml -f compose.test.yaml up -d --no-build --wait speech-api asr-worker
+      - name: Check real broker and worker recovery
+        run: python scripts/check_recovery.py
+      - name: Integration diagnostics
+        if: failure()
+        run: docker compose -p speech-test -f compose.yaml -f compose.test.yaml logs --tail=100
+      - name: Clean integration stack
+        if: always()
+        run: docker compose -p speech-test -f compose.yaml -f compose.test.yaml down -v

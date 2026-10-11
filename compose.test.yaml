@@ -1,0 +1,14 @@
+# Always use with a separate project: docker compose -p speech-test -f compose.yaml -f compose.test.yaml
+services:
+  speech-api:
+    environment:
+      ASR_SOFT_LIMIT: 8
+      ASR_HARD_LIMIT: 10
+    ports: !override ["127.0.0.1:18000:8000"]
+  asr-worker:
+    command: ["python", "-m", "tests.integration_worker"]
+    environment:
+      ASR_SOFT_LIMIT: 8
+      ASR_HARD_LIMIT: 10
+    volumes:
+      - ./tests:/app/tests:ro
