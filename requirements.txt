@@ -1,2 +1,4 @@
 # Portable development/test environment (replaces the machine-specific pip freeze).
 -r requirements-dev.txt
+# Preserve the existing WER/CER benchmark utility.
+jiwer==4.0.0

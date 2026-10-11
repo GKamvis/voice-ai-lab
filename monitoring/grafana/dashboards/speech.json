@@ -26,7 +26,8 @@
       "targets": [
         {
           "expr": "sum(rate(asr_requests_total{route=\"/jobs\",method=\"POST\"}[$__rate_interval]))",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Requests per second"
         }
       ],
       "fieldConfig": {
@@ -53,7 +54,8 @@
       "targets": [
         {
           "expr": "histogram_quantile(0.95, sum by(le)(rate(asr_request_duration_seconds_bucket{route=\"/jobs\",method=\"POST\"}[$__rate_interval])))",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "API P95 latency"
         }
       ],
       "fieldConfig": {
@@ -80,7 +82,8 @@
       "targets": [
         {
           "expr": "histogram_quantile(0.95, sum by(le)(rate(asr_inference_duration_seconds_bucket[$__rate_interval])))",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Whisper inference P95"
         }
       ],
       "fieldConfig": {
@@ -107,7 +110,8 @@
       "targets": [
         {
           "expr": "sum(increase(asr_jobs_failed_total[$__range]))",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Failed jobs"
         }
       ],
       "fieldConfig": {
@@ -134,7 +138,8 @@
       "targets": [
         {
           "expr": "asr_queue_length",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Queue length"
         }
       ],
       "fieldConfig": {
@@ -161,7 +166,8 @@
       "targets": [
         {
           "expr": "histogram_quantile(0.95, sum by(le)(rate(asr_queue_wait_seconds_bucket[$__rate_interval])))",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Queue wait P95"
         }
       ],
       "fieldConfig": {
@@ -188,7 +194,8 @@
       "targets": [
         {
           "expr": "asr_workers_alive",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Workers alive"
         }
       ],
       "fieldConfig": {
@@ -215,7 +222,8 @@
       "targets": [
         {
           "expr": "histogram_quantile(0.95, sum by(le)(rate(asr_job_duration_seconds_bucket[$__rate_interval])))",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "End-to-end job P95"
         }
       ],
       "fieldConfig": {
@@ -242,7 +250,8 @@
       "targets": [
         {
           "expr": "asr_jobs_processing",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Jobs processing"
         }
       ],
       "fieldConfig": {
@@ -269,7 +278,8 @@
       "targets": [
         {
           "expr": "sum(rate(asr_jobs_completed_total[$__rate_interval]))",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Completed jobs per second"
         }
       ],
       "fieldConfig": {
@@ -296,7 +306,8 @@
       "targets": [
         {
           "expr": "sum(rate(asr_jobs_failed_total[$__rate_interval])) / clamp_min(sum(rate(asr_jobs_failed_total[$__rate_interval]) + rate(asr_jobs_completed_total[$__rate_interval])), 0.00001)",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Terminal error rate"
         }
       ],
       "fieldConfig": {
@@ -323,7 +334,8 @@
       "targets": [
         {
           "expr": "histogram_quantile(0.95, sum by(le)(rate(asr_preprocessing_duration_seconds_bucket[$__rate_interval])))",
-          "refId": "A"
+          "refId": "A",
+          "legendFormat": "Preprocessing P95"
         }
       ],
       "fieldConfig": {
