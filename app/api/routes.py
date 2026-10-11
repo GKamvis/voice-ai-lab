@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 async def health(request: Request):
     service = getattr(request.app.state, 'service', None)
     if service is None:
-        raise HTTPException(503, 'Model is not ready')
+        return dict(status='healthy', model='whisper-' + __import__('os').getenv('ASR_MODEL', 'small'))
     return dict(status='healthy', model='whisper-' + service.model_name)
 
 

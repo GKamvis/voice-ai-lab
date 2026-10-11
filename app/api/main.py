@@ -1,21 +1,24 @@
 import logging
 import math
 import os
-import shutil
+import threading
+import asyncio
+import uuid
 import time
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from app.api.routes import router
 from app.services.asr_queue import ASRQueue
-from app.asr.whisper_model import load_model
-from app.services.transcription_service import TranscriptionService
-from app.vad.silero_vad import SileroVAD
+
+from app.jobs.store import JobStore
+from app.jobs.routes import router as jobs_router
+from app.jobs.dispatcher import run_dispatcher
 
 logger = logging.getLogger('uvicorn.error')
 
 
-def create_app(service_factory=None):
+def create_app(service_factory=None, job_store=None, dispatch=True):
     @asynccontextmanager
     async def lifespan(app):
         capacity = int(os.environ.get('ASR_QUEUE_SIZE', '10'))
@@ -23,17 +26,21 @@ def create_app(service_factory=None):
         if capacity < 1 or not math.isfinite(timeout) or timeout <= 0:
             raise ValueError('Queue size and timeout must be positive and finite')
         app.state.request_timeout = timeout
-        started = time.perf_counter()
+        app.state.job_store = job_store or JobStore()
         if service_factory is None:
-            if shutil.which('ffmpeg') is None:
-                raise RuntimeError('Install ffmpeg before starting the API')
-            name = os.environ.get('ASR_MODEL', os.environ.get('WHISPER_MODEL', 'small'))
-            model, loading_time = load_model(name)
-            app.state.model_loading_time = loading_time
-            app.state.service = TranscriptionService(model, SileroVAD(), name)
-            logger.info('Model loading time: %.3f s (whisper-%s)', loading_time, name)
-        else:
-            app.state.service = service_factory()
+            stop = threading.Event()
+            thread = threading.Thread(target=run_dispatcher, args=(app.state.job_store, stop), daemon=True)
+            if dispatch:
+                thread.start()
+            try:
+                yield
+            finally:
+                stop.set()
+                if dispatch:
+                    await asyncio.to_thread(thread.join, 10)
+            return
+        started = time.perf_counter()
+        app.state.service = service_factory()
         app.state.asr_queue = ASRQueue(app.state.service, capacity)
         logger.info('Service startup time: %.3f s', time.perf_counter() - started)
         try:
@@ -43,6 +50,14 @@ def create_app(service_factory=None):
             app.state.service = None
 
     app = FastAPI(title='Voice AI Lab ASR', lifespan=lifespan)
+    @app.middleware('http')
+    async def request_context(request, call_next):
+        request.state.request_id = str(uuid.uuid4())
+        response = await call_next(request)
+        response.headers['X-Request-ID'] = request.state.request_id
+        return response
+
+    app.include_router(jobs_router)
     app.include_router(router)
     return app
 

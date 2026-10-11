@@ -1,7 +1,6 @@
 """Bounded callback capture; no inference in the audio callback."""
 import queue
 import time
-import numpy as np
 from app.streaming.buffer import SR, FRAME
 
 
