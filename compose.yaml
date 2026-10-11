@@ -1,20 +1,75 @@
+x-asr: &asr
+  image: voice-ai-lab:local
+  build:
+    context: .
+    dockerfile: docker/Dockerfile
+  restart: unless-stopped
+  environment: &env
+    REDIS_URL: redis://redis:6379/0
+    STATE_REDIS_URL: redis://redis:6379/1
+    ASR_MODEL: ${ASR_MODEL:-small}
+    ASR_MAX_ACTIVE_JOBS: ${ASR_MAX_ACTIVE_JOBS:-20}
+    ASR_RESULT_TTL: ${ASR_RESULT_TTL:-86400}
+    ASR_SOFT_LIMIT: ${ASR_SOFT_LIMIT:-540}
+    ASR_HARD_LIMIT: ${ASR_HARD_LIMIT:-600}
+  depends_on:
+    redis:
+      condition: service_healthy
+
 services:
-  asr:
-    build: .
-    ports:
-      - "8000:8000"
-    environment:
-      ASR_MODEL: ${ASR_MODEL:-small}
-      ASR_QUEUE_SIZE: ${ASR_QUEUE_SIZE:-10}
-      ASR_REQUEST_TIMEOUT: ${ASR_REQUEST_TIMEOUT:-300}
-    volumes:
-      - model-cache:/root/.cache/whisper
-    stop_grace_period: 6m
+  speech-api:
+    <<: *asr
+    ports: ["127.0.0.1:8000:8000"]
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)"]
-      interval: 10s
-      timeout: 3s
-      start_period: 180s
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready', timeout=4)"]
+      interval: 15s
+      timeout: 5s
       retries: 3
+    stop_grace_period: 30s
+  asr-worker:
+    <<: *asr
+    command: ["celery", "-A", "app.jobs.celery_app:celery_app", "worker", "--loglevel=INFO", "--concurrency=1", "--hostname=asr@%h"]
+    volumes: ["model-cache:/home/asr/.cache"]
+    stop_grace_period: 11m
+    healthcheck:
+      test: ["CMD", "celery", "-A", "app.jobs.celery_app:celery_app", "inspect", "ping", "--timeout=5"]
+      interval: 30s
+      timeout: 10s
+      start_period: 30s
+      retries: 3
+  redis:
+    image: redis:7.4.2-alpine
+    command: ["redis-server", "--appendonly", "yes", "--appendfsync", "always", "--maxmemory", "1gb", "--maxmemory-policy", "noeviction"]
+    restart: unless-stopped
+    volumes: ["redis-data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  prometheus:
+    image: prom/prometheus:v3.2.1
+    restart: unless-stopped
+    ports: ["127.0.0.1:9090:9090"]
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus-data:/prometheus
+    command: ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.retention.time=7d"]
+  grafana:
+    image: grafana/grafana:11.6.0
+    restart: unless-stopped
+    ports: ["127.0.0.1:3000:3000"]
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-local-development-only}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+
 volumes:
+  redis-data:
   model-cache:
+  prometheus-data:
+  grafana-data:

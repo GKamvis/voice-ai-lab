@@ -3,3 +3,10 @@ __pycache__/
 *.pyc
 .DS_Store
 outputs/
+
+.env
+.env.*
+!.env.example
+!.env.prod.example
+.pytest_cache/
+.ruff_cache/

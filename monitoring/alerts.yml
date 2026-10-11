@@ -1,0 +1,18 @@
+groups:
+  - name: speech
+    rules:
+      - alert: SpeechAPIUnavailable
+        expr: up{job="speech-api"} == 0
+        for: 1m
+        labels: {severity: critical}
+        annotations: {summary: "API or Redis metrics endpoint unavailable"}
+      - alert: SpeechWorkersUnavailable
+        expr: asr_workers_alive == 0
+        for: 1m
+        labels: {severity: critical}
+        annotations: {summary: "No ASR worker heartbeat"}
+      - alert: SpeechQueueBacklog
+        expr: asr_queue_length > 5
+        for: 5m
+        labels: {severity: warning}
+        annotations: {summary: "ASR queue backlog sustained for five minutes"}
