@@ -41,7 +41,8 @@ class TranscriptionService:
             with TemporaryDirectory(prefix='asr-') as directory:
                 logger.info('[request_id=%s] preprocessing', request_id)
                 audio = self._prepare(upload, Path(directory))
-                logger.info('[request_id=%s] inference', request_id)
+                preprocessing_time = time.perf_counter() - started
+                logger.info('inference', extra={'event': 'inference', 'request_id': request_id})
                 result = transcribe(
                     self.model, audio, detector=self.detector, pre_ms=200, post_ms=300,
                     language='az', fp16=False, temperature=0.0, beam_size=5,
@@ -51,7 +52,8 @@ class TranscriptionService:
                 elapsed = time.perf_counter() - started
                 return dict(language='az', duration=duration, processing_time=elapsed,
                             rtf=elapsed / duration, text=result['transcript'],
-                            segments=result['chunks'])
+                            segments=result['chunks'], preprocessing_time=preprocessing_time,
+                            vad_time=result['vad_time'], inference_time=result['asr_time'])
         finally:
             self.lock.release()
 

@@ -1,3 +1,5 @@
+from celery.signals import setup_logging, heartbeat_sent
+from app.observability.logging import configure_logging
 from celery import Celery
 from app.jobs import config
 
@@ -11,3 +13,19 @@ celery_app.conf.update(
     broker_connection_retry_on_startup=True, broker_connection_timeout=3,
     task_publish_retry=False, worker_hijack_root_logger=False,
 )
+
+
+
+
+@setup_logging.connect
+def setup_worker_logging(**kwargs):
+    configure_logging()
+
+
+@heartbeat_sent.connect
+def worker_heartbeat(sender=None, **kwargs):
+    from app.jobs.store import JobStore
+    try:
+        JobStore().redis.set('asr:worker:' + sender.eventer.hostname, '1', ex=15)
+    except Exception:
+        pass  # Broker and job recovery remain independent of monitoring.

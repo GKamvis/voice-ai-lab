@@ -131,3 +131,27 @@ def test_capacity(client, monkeypatch):
     monkeypatch.setattr(config, 'MAX_ACTIVE', 1)
     assert submit(client).status_code == 202
     assert submit(client).status_code == 503
+
+
+def test_metrics_include_worker_results_and_no_job_labels(client, store):
+    job_id = submit(client).json()['job_id']
+    job = store.claim(job_id)
+    store.finish(job_id, job['token'], result={'inference_time': 1.2, 'processing_time': 1.5})
+    response = client.get('/metrics')
+    assert response.status_code == 200
+    assert 'asr_jobs_completed_total 1.0' in response.text
+    assert 'asr_inference_duration_seconds_count 1.0' in response.text
+    assert 'asr_queue_length 0.0' in response.text
+    assert job_id not in response.text
+
+
+def test_structured_logging_drops_private_data():
+    import json
+    import logging
+    from app.observability.logging import JSONFormatter
+    record = logging.LogRecord('test', logging.ERROR, '', 1, 'private transcript %s', ('private path',), None)
+    record.event = 'transcription_failed'
+    record.job_id = 'opaque-id'
+    data = JSONFormatter().format(record)
+    assert 'private' not in data
+    assert json.loads(data)['job_id'] == 'opaque-id'

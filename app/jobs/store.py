@@ -10,6 +10,7 @@ import uuid
 
 from redis import Redis, WatchError
 from app.jobs import config
+from app.observability.metrics import observe
 
 TERMINAL = {'completed', 'failed'}
 OUTBOX = 'asr:outbox'
@@ -87,6 +88,8 @@ class JobStore:
                     job['updated_at'] = time.time()
                     pipe.multi()
                     pipe.set(key, json.dumps(job))
+                    if previous == 'queued' and job['status'] == 'processing':
+                        observe(pipe, 'asr_queue_wait_seconds', time.time() - job['created_at'])
                     pipe.srem('asr:state:' + previous, job_id)
                     if job['status'] in TERMINAL:
                         pipe.expire(key, config.RETENTION)
@@ -94,6 +97,13 @@ class JobStore:
                         pipe.delete('asr:audio:' + job_id)
                         pipe.zrem(OUTBOX, job_id)
                         pipe.incr('asr:metrics:jobs_' + job['status'])
+                        observe(pipe, 'asr_job_duration_seconds', time.time() - job['created_at'])
+                        if job['status'] == 'completed':
+                            result = job.get('result') or {}
+                            for field, metric in [('inference_time', 'inference'),
+                                                  ('preprocessing_time', 'preprocessing'), ('vad_time', 'vad')]:
+                                if field in result:
+                                    observe(pipe, 'asr_' + metric + '_duration_seconds', result[field])
                     else:
                         pipe.sadd('asr:state:' + job['status'], job_id)
                         pipe.zadd(OUTBOX, {job_id: job['next_delivery']})
