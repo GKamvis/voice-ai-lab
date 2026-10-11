@@ -155,3 +155,67 @@ def test_structured_logging_drops_private_data():
     data = JSONFormatter().format(record)
     assert 'private' not in data
     assert json.loads(data)['job_id'] == 'opaque-id'
+
+
+def test_redis_outage_is_controlled(client, store, monkeypatch):
+    from redis.exceptions import ConnectionError
+    monkeypatch.setattr(store, 'submit', Mock(side_effect=ConnectionError('private server')))
+    assert submit(client).status_code == 503
+    monkeypatch.setattr(store.redis, 'ping', Mock(side_effect=ConnectionError))
+    assert client.get('/ready').status_code == 503
+    assert client.get('/health').status_code == 200
+
+
+def test_audio_size_limit(client, monkeypatch):
+    monkeypatch.setattr('app.jobs.routes.MAX_UPLOAD_BYTES', 4)
+    assert submit(client, b'12345').status_code == 413
+
+
+def test_parallel_idempotency(client):
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        responses = list(pool.map(lambda _: submit(client, headers={'Idempotency-Key': 'shared'}), range(5)))
+    assert all(response.status_code == 202 for response in responses)
+    assert len({response.json()['job_id'] for response in responses}) == 1
+
+
+def test_crash_budget_becomes_failed(store):
+    job_id = store.submit(wav(), '.wav', 'r')['job_id']
+    for _ in range(config.MAX_ATTEMPTS):
+        assert store.claim(job_id)['status'] == 'processing'
+        store._change(job_id, lambda j: j.update(lease_until=0, next_delivery=0) or True)
+    assert store.claim(job_id)['status'] == 'failed'
+    assert store.redis.zscore(OUTBOX, job_id) is None
+    assert store.redis.get('asr:metrics:jobs_failed') == b'1'
+    assert store.claim(job_id) is None
+
+
+def test_outbox_replays_after_dispatcher_crash(store, monkeypatch):
+    import app.jobs.store as module
+    job_id = store.submit(wav(), '.wav', 'r')['job_id']
+    now = time.time()
+    publish = Mock(side_effect=ConnectionError)
+    with pytest.raises(ConnectionError):
+        dispatch_once(store, publish)
+    monkeypatch.setattr(module.time, 'time', lambda: now + 31)
+    publisher = Mock()
+    dispatch_once(store, publisher)
+    publisher.assert_called_once_with(job_id)
+
+
+def test_bearer_token(client, monkeypatch):
+    monkeypatch.setenv('API_TOKEN', 'test-token')
+    assert submit(client).status_code == 401
+    assert submit(client, headers={'Authorization': 'Bearer wrong'}).status_code == 401
+    assert submit(client, headers={'Authorization': 'Bearer test-token'}).status_code == 202
+
+
+def test_outbox_uses_distinct_transport_ids(store, monkeypatch):
+    from app.jobs.dispatcher import celery_app
+    publisher = Mock()
+    monkeypatch.setattr(celery_app, 'send_task', publisher)
+    job_id = store.submit(wav(), '.wav', 'r')['job_id']
+    dispatch_once(store)
+    assert publisher.call_args.kwargs['args'] == [job_id]
+    # Reusing logical job_id as Celery task_id would permanently revoke later
+    # deliveries after an expired message was consumed from a long queue.
+    assert 'task_id' not in publisher.call_args.kwargs

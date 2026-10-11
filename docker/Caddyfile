@@ -1,0 +1,12 @@
+{$API_DOMAIN} {
+    request_body {
+        max_size 26MB
+    }
+    @api path /health /jobs /jobs/*
+    handle @api {
+        reverse_proxy speech-api:8000
+    }
+    handle {
+        respond "Not found" 404
+    }
+}

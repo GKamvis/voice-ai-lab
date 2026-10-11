@@ -6,8 +6,10 @@ logger = logging.getLogger(__name__)
 
 
 def dispatch_once(store, publish=None):
+    # Each delivery needs its own Celery ID: an expired message is revoked by ID.
+    # The stable logical job ID lives in the argument and is fenced by JobStore.
     publish = publish or (lambda job_id: celery_app.send_task(
-        'speech.transcribe', args=[job_id], task_id=job_id, expires=25))
+        'speech.transcribe', args=[job_id], expires=25))
     for job_id in store.due():
         if store.reserve_delivery(job_id):
             # If publishing fails, the reservation expires in 30 seconds.

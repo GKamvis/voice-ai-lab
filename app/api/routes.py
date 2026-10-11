@@ -33,7 +33,7 @@ async def transcribe(request: Request, response: Response, file: UploadFile = Fi
     try:
         queue = getattr(request.app.state, 'asr_queue', None)
         if queue is None:
-            raise HTTPException(503, 'Model is not ready', headers=headers)
+            raise HTTPException(410, 'Use POST /jobs and GET /jobs/{job_id}', headers=headers)
         if queue.queue.full() or not queue.accepting:
             raise asyncio.QueueFull
         data = await file.read(MAX_UPLOAD_BYTES + 1)

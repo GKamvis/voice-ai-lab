@@ -1,3 +1,4 @@
+import hmac
 import logging
 import math
 import os
@@ -59,6 +60,10 @@ def create_app(service_factory=None, job_store=None, dispatch=True):
     @app.middleware('http')
     async def request_context(request, call_next):
         request.state.request_id = str(uuid.uuid4())
+        token = os.getenv('API_TOKEN')
+        if token and request.url.path.startswith('/jobs'):
+            if not hmac.compare_digest(request.headers.get('authorization', ''), 'Bearer ' + token):
+                return Response(status_code=401, headers={'WWW-Authenticate': 'Bearer'})
         started = time.perf_counter()
         response = await call_next(request)
         route = request.scope.get('route')

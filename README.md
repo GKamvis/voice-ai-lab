@@ -1,3 +1,25 @@
+# Speech AI — Redis / Celery stack
+
+Hazır axın: **Client → FastAPI → Redis → Celery worker → preprocessing → Silero VAD → Whisper → result**.
+
+```sh
+cp .env.example .env
+docker compose up -d --build
+curl -F file=@samples/01_clean.wav http://localhost:8000/jobs
+curl http://localhost:8000/jobs/JOB_ID
+```
+
+API: http://localhost:8000/docs · Prometheus: http://localhost:9090 · Grafana: http://localhost:3000/d/speech-ai
+
+- [Lokal start, reliability, metrics, bottleneck və testlər](docs/operations.md)
+- [Öz Linux VPS-ində production deployment](docs/production.md) — nümunə/runbook; bu layihə üçün server ayrılmayıb.
+- CI: `.github/workflows/ci.yml` — Ruff, Pytest, Docker build və real broker/worker recovery testləri.
+- `ASR_MODEL=small`; nəticələr 24 saat saxlanır. `/transcribe` əvəzinə `/jobs` istifadə olunur.
+
+Aşağıdakı qeydlər əvvəlki ASR/VAD/streaming eksperimentlərini sənədləşdirir; köhnə server/Compose əmrləri üçün yuxarıdakı yeni təlimata bax.
+
+---
+
 # voice-ai-lab
 
 ## VAD təcrübəsi
