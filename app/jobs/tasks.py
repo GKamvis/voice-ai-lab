@@ -15,12 +15,12 @@ logger = logging.getLogger(__name__)
 
 
 @lru_cache(maxsize=1)
-def get_service():
+def get_service(model_name=config.MODEL):
     from app.asr.whisper_model import load_model
     from app.services.transcription_service import TranscriptionService
     from app.vad.silero_vad import SileroVAD
-    model, _ = load_model(config.MODEL)
-    return TranscriptionService(model, SileroVAD(), config.MODEL)
+    model, _ = load_model(model_name)
+    return TranscriptionService(model, SileroVAD(), model_name)
 
 
 @celery_app.task(bind=True, name='speech.transcribe', max_retries=3)
@@ -37,7 +37,7 @@ def transcribe_audio(self, job_id):
             raise AudioValidationError('Audio payload is unavailable')
         with io.BytesIO(data) as handle:
             upload = UploadFile(filename='audio' + job['suffix'], file=handle)
-            result = get_service().transcribe(upload, job['request_id'])
+            result = get_service(job['model']).transcribe(upload, job['request_id'])
     except (ConnectionError, TimeoutError, RedisConnectionError, RedisTimeoutError,
             SoftTimeLimitExceeded):
         delay = min(60, 2 ** job['attempts']) + random.uniform(0, 1)

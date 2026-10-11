@@ -14,7 +14,7 @@ def transcribe(*args, **kwargs):
 model = Mock()
 model.transcribe.side_effect = transcribe
 service = TranscriptionService(model, lambda audio, sr: [{'start': 0, 'end': len(audio)}])
-tasks.get_service = lambda: service
+tasks.get_service = lambda model_name=None: service
 
 if __name__ == '__main__':
     celery_app.worker_main(['worker', '--loglevel=INFO', '--concurrency=1', '--hostname=test@%h'])

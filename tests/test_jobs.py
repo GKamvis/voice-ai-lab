@@ -71,7 +71,7 @@ def test_worker_normal_and_duplicate(store, monkeypatch):
     model.transcribe.return_value = {'text': 'Salam'}
     service = TranscriptionService(model, Mock(return_value=[{'start': 0, 'end': 16000}]))
     monkeypatch.setattr(tasks, 'JobStore', lambda: store)
-    monkeypatch.setattr(tasks, 'get_service', lambda: service)
+    monkeypatch.setattr(tasks, 'get_service', lambda model_name=None: service)
     job_id = store.submit(wav(), '.wav', 'r')['job_id']
     tasks.transcribe_audio.run(job_id)
     tasks.transcribe_audio.run(job_id)
@@ -89,7 +89,7 @@ def test_worker_normal_and_duplicate(store, monkeypatch):
 ])
 def test_worker_failure(store, monkeypatch, data, service, error):
     monkeypatch.setattr(tasks, 'JobStore', lambda: store)
-    monkeypatch.setattr(tasks, 'get_service', lambda: service)
+    monkeypatch.setattr(tasks, 'get_service', lambda model_name=None: service)
     job_id = store.submit(data, '.wav', 'r')['job_id']
     tasks.transcribe_audio.run(job_id)
     assert store.get(job_id)['status'] == 'failed'
@@ -219,3 +219,15 @@ def test_outbox_uses_distinct_transport_ids(store, monkeypatch):
     # Reusing logical job_id as Celery task_id would permanently revoke later
     # deliveries after an expired message was consumed from a long queue.
     assert 'task_id' not in publisher.call_args.kwargs
+
+
+def test_worker_honors_model_selected_when_job_was_submitted(store, monkeypatch):
+    monkeypatch.setattr(tasks, 'JobStore', lambda: store)
+    monkeypatch.setattr(config, 'MODEL', 'base')
+    job_id = store.submit(wav(), '.wav', 'r')['job_id']
+    monkeypatch.setattr(config, 'MODEL', 'small')
+    factory = Mock(return_value=Mock(transcribe=Mock(return_value={'processing_time': 1})))
+    monkeypatch.setattr(tasks, 'get_service', factory)
+    tasks.transcribe_audio.run(job_id)
+    factory.assert_called_once_with('base')
+    assert store.get(job_id)['model'] == 'base'
